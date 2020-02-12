@@ -11,6 +11,6 @@ setuptools.setup(
                      "models.",
     url="https://github.com/audienceproject/artifacts-metadata-py",
     packages=setuptools.find_packages(),
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=["boto3>=1.0.0"]
 )
