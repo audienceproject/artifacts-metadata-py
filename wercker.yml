@@ -2,7 +2,7 @@ box:
     id: audienceproject/python
     username: $DOCKERHUB_ACCOUNT
     password: $DOCKERHUB_PASSWORD
-    tag: 3.8
+    tag: 3.6
 no-response-timeout: 25
 command-timeout: 25
 
@@ -11,7 +11,7 @@ build:
         - script:
             name: Setup virtualenv
             code: |
-                virtualenv env --python=python3.8 --clear
+                virtualenv env --python=python3.6 --clear
                 env/bin/pip install pylint==2.4.4 boto3==1.0.0
         - script:
             name: PyLint
@@ -22,7 +22,7 @@ deploy:
         - script:
             name: Setup virtualenv
             code: |
-                virtualenv env --python=python3.8 --clear
+                virtualenv env --python=python3.6 --clear
                 env/bin/pip install twine==3.1.1
         - script:
             name: Build library

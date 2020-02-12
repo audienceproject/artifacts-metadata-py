@@ -39,7 +39,7 @@ class ArtifactsMetadataClient:
             metadata = {}
         metadata["id"] = str(uuid.uuid1())
         metadata["artifactType"] = artifact_type
-        metadata["timestamp"] = time.time_ns() // 1000000
+        metadata["timestamp"] = int(round(time.time() * 1000))
         if "location" in metadata:
             metadata["location"] = metadata["location"].replace("{artifact-id}", metadata["id"])
         self.table.put_item(
