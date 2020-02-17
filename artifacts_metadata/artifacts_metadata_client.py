@@ -3,7 +3,7 @@ Copyright (c) 2020 AudienceProject ApS (https://audienceproject.com)
 """
 import time
 import uuid
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
 import boto3
 
@@ -47,7 +47,7 @@ class ArtifactsMetadataClient:
         )
         return metadata["id"]
 
-    def get(self, artifact_id: str) -> Dict[str, object]:
+    def get(self, artifact_id: str) -> Dict[str, Any]:
         """
         Returns the medata associated with a give id.
 

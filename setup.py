@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="artifacts-metadata",
-    version="0.0.3",
+    version="0.0.4",
     author="Cosmin Catalin Sanda",
     author_email="cosmin@audienceproject.com",
     description="A library for managing artifacts metadata in DynamoDB",
