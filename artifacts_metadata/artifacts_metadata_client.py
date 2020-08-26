@@ -73,10 +73,3 @@ class ArtifactsMetadataClient:
         metadata["mm"] = int(date.split("-")[1])
         metadata["dd"] = int(date.split("-")[2])
         return self.log(artifact_type, metadata)
-
-
-if __name__ == '__main__':
-    session = boto3.session.Session(region_name="us-east-1")
-    dynamodb_resource = session.resource("dynamodb")
-    artifacts_metadata_client = ArtifactsMetadataClient(dynamodb_resource=dynamodb_resource)
-    print(artifacts_metadata_client.get_latest_before("inference-labeled-data", 2020, 5, 1))
