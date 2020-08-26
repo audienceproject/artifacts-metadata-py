@@ -22,10 +22,12 @@ class ArtifactsMetadataClient:
             dynamodb_resource = session.resource("dynamodb")
         self.table = dynamodb_resource.Table(table_name)
 
-    def getUuid(self) -> str:
+    @staticmethod
+    def get_uuid() -> str:
         return str(uuid.uuid1())
 
-    def log(self, artifact_type: str, uuid: str = getUuid, metadata: Optional[Dict[str, object]] = None) -> str:
+    def log(self, artifact_type: str, uuid: str = get_uuid,
+            metadata: Optional[Dict[str, object]] = None) -> str:
         """
         Stores a dictionary of metadata into DynamoDB. Will always create a record,
         it does not update.
@@ -62,13 +64,8 @@ class ArtifactsMetadataClient:
         """
         return self.table.get_item(Key={"id": artifact_id})["Item"]
 
-    def log_with_reference_time(self, artifact_type: str, yyyy: int, mm: int, dd: int, metadata: Optional[Dict[str, object]] = None) -> str:
-        metadata["yyyy"] = yyyy
-        metadata["mm"] = mm
-        metadata["dd"] = dd
-        return self.log(artifact_type, metadata)
-
-    def log_with_reference_time_as_date_string(self, artifact_type: str, date: str, metadata: Optional[Dict[str, object]] = None) -> str:
+    def log_with_reference_time_as_date_string(self, artifact_type: str, date: str,
+                                               metadata: Optional[Dict[str, object]] = None) -> str:
         metadata["yyyy"] = int(date.split("-")[0])
         metadata["mm"] = int(date.split("-")[1])
         metadata["dd"] = int(date.split("-")[2])
