@@ -2,7 +2,7 @@
 Copyright (c) 2020 AudienceProject ApS (https://audienceproject.com)
 """
 import time
-import uuid
+import uuid as uuidlib
 from typing import Dict, Optional, Any
 
 import boto3
@@ -24,7 +24,12 @@ class ArtifactsMetadataClient:
 
     @staticmethod
     def get_uuid() -> str:
-        return str(uuid.uuid1())
+        """
+        Returns a UUID
+
+        @return: A UUID
+        """
+        return str(uuidlib.uuid1())
 
     def log(self, artifact_type: str, uuid: str = get_uuid,
             metadata: Optional[Dict[str, object]] = None) -> str:
@@ -66,6 +71,14 @@ class ArtifactsMetadataClient:
 
     def log_with_reference_time_as_date_string(self, artifact_type: str, date: str,
                                                metadata: Optional[Dict[str, object]] = None) -> str:
+        """
+        Simplify providing a reference date when saving the metadata.
+
+        @param artifact_type: A string categorization for artifacts.
+        @param date: Reference date
+        @param metadata: A dictionary of values. Can be deep, but must conform to the
+            constraints of a DynamoDB PUT operation.
+        """
         metadata["yyyy"] = int(date.split("-")[0])
         metadata["mm"] = int(date.split("-")[1])
         metadata["dd"] = int(date.split("-")[2])
